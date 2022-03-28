@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Count!</title>
+    <style>
+        body {
+            text-align: center;
+        }
+        .container-two-col {
+            display: grid; /*arranges child elements into a grid*/
+            column-gap: 10px;
+            row-gap: 10px;
+            justify-content:center; /*centers the grid*/
+            grid-template-columns: auto auto;  /*defines two columns, auto-fit to content width */
+        }
+    </style>
+</head>
+<body>
+    <h1>Count!</h1>
+    <div class="container-two-col">
+        <label>Low:</label><input class="low" type="number">
+        <label>High:</label><input class="high" type="number">
+    </div>
+    
+    <div class="container-two-col">
+        <button class="up">Count Up</button>
+        <button class="down">Count Down</button>
+    </div>
+    
+    <p class="numbers"></p>
+
+    <script src="day3_count.js"></script>
+</body>
+</html>
