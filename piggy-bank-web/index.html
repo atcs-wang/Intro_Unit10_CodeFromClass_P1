@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piggy Bank</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1 class=balance>$<span id="balance-amount">0.00</span></h1>
+
+    <div class="coins">
+        <button id="penny" class="coin">
+            <img src="images/penny.jpg">
+            <kbd>P</kbd>
+        </button>
+        <button id="nickel" class="coin">
+            <img src="images/nickel.jpg">
+            <kbd>N</kbd>
+        </button>
+        <button id="dime" class="coin">
+            <img src="images/dime.jpg">
+            <kbd>D</kbd>
+        </button>
+        <button id="quarter" class="coin">
+            <img src="images/quarter.jpg">
+            <kbd>Q</kbd>
+        </button>
+    </div>
+
+    <ul class="history"></ul>
+    <audio src="audio/coin-add.wav" class="coin-add"></audio>
+    <audio src="audio/coin-remove.wav" class="coin-remove"></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
