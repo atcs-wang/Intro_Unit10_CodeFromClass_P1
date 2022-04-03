@@ -21,15 +21,75 @@ function updateBalance(amount : number, remove : boolean) : void {
     soundElm.play();
 }
 
+// There is no difference between anonymous functions and arrow functions
+//Also, both .onclick and .addEventListener are valid 
 pennyElm.onclick = function (event : MouseEvent) {
-    updateBalance(0.01, event.ctrlKey);
+    updateBalance(0.01, event.shiftKey);
+    addToHistory("p");
 }
-nickelElm.onclick = function (event : MouseEvent) {
-    updateBalance(0.05, event.ctrlKey);
-}
+nickelElm.addEventListener("click", function  (event : MouseEvent) {
+    updateBalance(0.05, event.shiftKey);
+    addToHistory("n");
+}); 
 dimeElm.onclick = (event : MouseEvent) => {
-    updateBalance(0.10, event.ctrlKey);
+    updateBalance(0.10, event.shiftKey);
+    addToHistory("d");
 }
-quarterElm.onclick = (event : MouseEvent) => {
-    updateBalance(0.25, event.ctrlKey);
+quarterElm.addEventListener("click", (event : MouseEvent) => {
+    updateBalance(0.25, event.shiftKey);
+    addToHistory("q");
+});
+
+document.addEventListener("keydown", (event: KeyboardEvent) => {
+    if (event.repeat)
+        return;
+    let coinValue : number = 0;
+    switch (event.key) {
+        case "P":case "p":
+            coinValue = 0.01;
+            pennyElm.classList.add("keypress");
+        break;
+        case "N":case "n":
+            coinValue = 0.05;
+            nickelElm.classList.add("keypress");
+        break;
+        case "D:":case "d":
+            coinValue = 0.10;
+            dimeElm.classList.add("keypress");
+        break;
+        case "Q":case "q":
+            coinValue = 0.25;
+            quarterElm.classList.add("keypress");
+        break;
+        default:
+            return; //stop if not one of  these keys
+    }
+    
+    let doIRemove : boolean = event.key.toUpperCase() === event.key;
+    updateBalance(coinValue, doIRemove);
+});
+
+document.addEventListener("keyup", (event: KeyboardEvent) => {
+    switch (event.key) {
+        case "P":case "p":
+            pennyElm.classList.remove("keypress");
+        break;
+        case "N":case "n":
+            nickelElm.classList.remove("keypress");
+        break;
+        case "D:":case "d":
+            dimeElm.classList.remove("keypress");
+        break;
+        case "Q":case "q":
+            quarterElm.classList.remove("keypress");
+        break;
+        default:
+            return; //stop if not one of  these keys
+    }
+})
+
+function addToHistory(coin : string) {
+    let liElm : HTMLLIElement = document.createElement("li");
+    liElm.textContent = coin;
+    historyElm.appendChild(liElm);
 }
