@@ -21,24 +21,15 @@ function updateBalance(amount : number, remove : boolean) : void {
     soundElm.play();
 }
 
-// There is no difference between anonymous functions and arrow functions
-//Also, both .onclick and .addEventListener are valid 
-pennyElm.onclick = function (event : MouseEvent) {
-    updateBalance(0.01, event.shiftKey);
-    addToHistory("p");
+function handleCoinClick(event : MouseEvent) {
+    let clickedElm = event.currentTarget as HTMLElement;
+    updateBalance( Number(clickedElm.dataset.amount), event.shiftKey);
+    addToHistory(clickedElm.dataset.letter as string, event.shiftKey);
 }
-nickelElm.addEventListener("click", function  (event : MouseEvent) {
-    updateBalance(0.05, event.shiftKey);
-    addToHistory("n");
-}); 
-dimeElm.onclick = (event : MouseEvent) => {
-    updateBalance(0.10, event.shiftKey);
-    addToHistory("d");
-}
-quarterElm.addEventListener("click", (event : MouseEvent) => {
-    updateBalance(0.25, event.shiftKey);
-    addToHistory("q");
-});
+pennyElm.onclick = handleCoinClick
+nickelElm.addEventListener("click", handleCoinClick); 
+dimeElm.onclick = handleCoinClick
+quarterElm.addEventListener("click", handleCoinClick);
 
 document.addEventListener("keydown", (event: KeyboardEvent) => {
     if (event.repeat)
@@ -65,8 +56,9 @@ document.addEventListener("keydown", (event: KeyboardEvent) => {
             return; //stop if not one of  these keys
     }
     
-    let doIRemove : boolean = event.key.toUpperCase() === event.key;
+    let doIRemove : boolean = event.shiftKey;
     updateBalance(coinValue, doIRemove);
+    addToHistory(event.key.toLowerCase(), doIRemove);
 });
 
 document.addEventListener("keyup", (event: KeyboardEvent) => {
@@ -88,8 +80,33 @@ document.addEventListener("keyup", (event: KeyboardEvent) => {
     }
 })
 
-function addToHistory(coin : string) {
+function addToHistory(coin : string, negative : boolean) {
     let liElm : HTMLLIElement = document.createElement("li");
     liElm.textContent = coin;
+    if (negative) 
+        liElm.classList.add("negative");
     historyElm.appendChild(liElm);
+
+    liElm.addEventListener("click", removeFromHistory);
+}
+
+function removeFromHistory(event : MouseEvent) {
+    let elm = event.currentTarget as HTMLElement;
+    elm.remove();
+    //undo the original balance change
+    switch(elm.textContent) {
+        case "p":
+            updateBalance(0.01, ! elm.classList.contains("negative"));
+        break;
+        case "n":
+            updateBalance(0.05, ! elm.classList.contains("negative"));
+        break;
+        case "d":
+            updateBalance(0.10, ! elm.classList.contains("negative"));
+        break;
+        case "q":
+            updateBalance(0.25, ! elm.classList.contains("negative"));
+        break;
+        
+    }
 }
