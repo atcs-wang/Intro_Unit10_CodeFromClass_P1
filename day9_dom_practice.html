@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day8 DOM Practice</title>
+
+    <style>
+        ol {
+            margin: 20px;
+        }
+        li {
+            font-family: sans-serif;
+            font-size: 1.2rem;
+        }
+        .exciting {
+            color: gold;
+        }
+        .scary {
+            color: red;
+        }
+        .yay {
+            color: green;
+            text-transform: uppercase;
+        }
+        .cool {
+            color:blue;
+        }
+        .standout {
+            font-weight: bold;
+        }
+        .human {
+            font-family: cursive;
+            font-style: italic;
+        }
+        .author{
+            font-family: serif;
+        }
+        .robotic {
+            font-family: monospace;
+            letter-spacing: 2px;
+        }
+        .highlight {
+            background-color: yellow;
+        }
+
+    </style>
+</head>
+<body> 
+    <h1>Practice manipulating the DOM!</h1>
+    <ol>
+        <li class="adj">Any</li>
+        <li class="noun" data-sentiment="negative">fool</li>
+        <li>can</li>
+        <li>write</li>
+        <li class="noun">code</li>
+        <li>that</li>
+        <li>a</li>
+        <li class="noun" data-sentient="no">computer</li>
+        <li>can</li>
+        <li>understand.</li>
+        <hr>
+        <li class="adj" data-sentiment="positive">Good</li>
+        <li class="noun" data-sentient="yes" id="best">programmers</li>
+        <li>write</li>
+        <li class="noun">code</li>
+        <li>that</li>
+        <li class="noun" data-sentient="yes">humans</li>
+        <li>can</li>
+        <li>understand.</li>
+        <li class="author">– Someone wise</li>
+    </ol>
+
+    <script src="day9_dom_practice.js"></script>
+</body>
+</html>
